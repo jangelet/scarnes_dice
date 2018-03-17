@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     static int userOverallScore, userTurnScore, cpuOverallScore, cpuTurnScore;
     static final int GAME_POINT = 100;
     TextView mScoreTv;
+    TextView mStatusTv;
     ImageView mDiceFaceIv;
     Button mRollBtn, mHoldBtn, mResetBtn;
     int[] diceFaces ={
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mScoreTv = (TextView)findViewById(R.id.tv_score);
+        mStatusTv = (TextView)findViewById(R.id.tv_status);
         mDiceFaceIv = (ImageView)findViewById(R.id.iv_dice);
         mRollBtn = (Button)findViewById(R.id.btn_roll);
         mHoldBtn = (Button)findViewById(R.id.btn_hold);
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
     void clickReset(){
         userOverallScore = userTurnScore = cpuOverallScore = cpuTurnScore = 0;
+        mRollBtn.setEnabled(true);
+        mHoldBtn.setEnabled(true);
         updatePlayerLabel();
     }
 
@@ -101,16 +105,22 @@ public class MainActivity extends AppCompatActivity {
     void updatePlayerLabel(){
         mScoreTv.setText("Your Score: " + userOverallScore +
         "\nYour Turn Score: " + userTurnScore);
+        mStatusTv.setText("Your turn!");
     }
 
     void updateCpuLabel(int n){
         if(n == 1) {
-            mScoreTv.setText("Computer rolled a 1. Your turn!");
+            mScoreTv.setText("CPU Score: " + cpuOverallScore +
+                            "\nCPU Turn Score: " + cpuTurnScore);
+            mStatusTv.setText("Computer rolled a 1. Your turn!");
         }else if(n > 1){
             mScoreTv.setText("CPU Score: " + cpuOverallScore +
                     "\nCPU Turn Score: " + cpuTurnScore);
+            mStatusTv.setText("Computer rolling...");
         }else{
-            mScoreTv.setText("Computer holds.");
+            mScoreTv.setText("CPU Score: " + cpuOverallScore +
+                    "\nCPU Turn Score: " + cpuTurnScore);
+            mStatusTv.setText("Computer holds.");
         }
     }
 
@@ -145,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
 //            cpuOverallScore += cpuTurnScore;
             cpuTurnScore += cpuDice;
             updateCpuLabel(cpuDice);
+
         }
 //        }
 //        mRollBtn.setEnabled(true);

@@ -15,6 +15,13 @@
         android:text="@string/score_tv"
         />
 
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:text="Your turn!"/>
+
     <ImageView
         android:id="@+id/iv_dice"
         android:layout_marginTop="100dp"
@@ -48,5 +55,6 @@
             android:layout_height="wrap_content"
             android:text="@string/reset_btn"
             />
+
     </LinearLayout>
 </LinearLayout>
